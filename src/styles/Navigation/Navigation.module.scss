@@ -1,0 +1,31 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/navbar";
+
+
+.Navigation {
+  @extend .navbar-expand-#{lg};
+  @extend .navbar;
+  @extend .navbar-light;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  background: $light;
+  color: $black
+}
+
+.Logo {
+  @extend .navbar-brand;
+}
+
+.Button {
+  @extend .navbar-toggler;
+  span {
+    @extend .navbar-toggler-icon;
+  }
+}

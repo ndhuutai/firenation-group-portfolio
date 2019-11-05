@@ -1,0 +1,16 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/nav";
+
+.CollapsibleItems {
+  @extend .navbar-collapse;
+  ul {
+    @extend .navbar-nav;
+    li {
+      @extend .nav-item;
+    }
+  }
+}
