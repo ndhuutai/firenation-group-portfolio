@@ -3,6 +3,7 @@ import {NavLink} from 'react-router-dom';
 
 import CollapsibleItem from './CollapsibleItem/CollapsibleItem';
 import LoginButton from '../../Login/LoginButton';
+import AdminButton from '../../Admin/AdminButton';
 import AuthContext from '../../../contexts/App/AuthContext';
 
 import classes from '../../../styles/Navigation/CollapsibleItems/CollapsibleItems.module.scss';
@@ -11,7 +12,6 @@ const CollapsibleItems = (props) => {
 
 	const ref = useRef(null);
 	const authContext = useContext(AuthContext);
-	console.log(authContext, 'im HERERERERE');
 	//whenever a click is outside/not the hamburger button
 	//close the navbar by simulating a click after the re-render has completed.
 	useEffect(() => {
@@ -32,7 +32,7 @@ const CollapsibleItems = (props) => {
 				<input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
 				<button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 			</form>
-			{authContext.user? <button className="btn btn-primary">Admin</button>: <LoginButton/>}
+			{authContext.user? <AdminButton/>: <LoginButton/>}
 		</div>
 	)
 };
