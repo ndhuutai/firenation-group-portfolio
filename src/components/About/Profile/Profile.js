@@ -7,7 +7,8 @@ const Profile = (props) => (
 			<h5 className="card-title">{props.title}</h5>
 			<p className="card-text">{props.description}</p>
 			<button className="btn btn-link">Show Projects</button>
-			{props.showEdit && <button className="btn btn-danger">Edit</button>}
+			{props.showEdit && <button className="btn btn-danger" data-toggle="modal" data-target="#editModal"
+			onClick={props.editClick}>Edit</button>}
 		</div>
 	</div>
 );

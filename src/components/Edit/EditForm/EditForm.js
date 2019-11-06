@@ -1,13 +1,11 @@
 import React from 'react';
 
-const EditForm = (props) => (
-	<form>
-		{props.formConfigs.map(config => {
-			return <div className="form-group">
-				<label htmlFor={config.labelFor}>{config.description}</label>
-			</div>
-		})}
-	</form>
-);
+const EditForm = (WrappedComponent) => {
+	return (props) => {
+		return (
+			<WrappedComponent formConfigs={props.formConfigs}/>
+		)
+	};
+};
 
 export default EditForm;
