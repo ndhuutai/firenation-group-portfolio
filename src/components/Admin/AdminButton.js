@@ -16,7 +16,7 @@ const AdminButton = (props) => {
 
 	return (
 		<div>
-			<button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+			<button className="btn ml-md-1 btn-info dropdown-toggle" type="button" id="dropdownMenuButton"
 			        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				Admin
 			</button>

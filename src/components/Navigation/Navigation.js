@@ -10,7 +10,7 @@ const Navigation = (props) => {
 	const ref= useRef(null);
 
 	return (
-		<nav className="navbar navbar-expand-md navbar-light bg-light sticky-top">
+		<nav className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
 			<NavLink className="navbar-brand" to="/">Fire Nation</NavLink>
 			<button ref={ref} className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsedNavItems"
 			        aria-controls="collapsedNavItems" aria-expanded="false" aria-label="Toggle navigation">

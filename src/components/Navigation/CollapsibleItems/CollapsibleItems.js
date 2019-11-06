@@ -15,13 +15,14 @@ const CollapsibleItems = (props) => {
 	//whenever a click is outside/not the hamburger button
 	//close the navbar by simulating a click after the re-render has completed.
 	useEffect(() => {
-		if(ref.current.classList.contains("show") && !props.clickedElement.classList.contains("navbar-toggler-icon")) {
+		if(ref.current.classList.contains("show") && !props.clickedElement.classList.contains("navbar-toggler-icon")
+		&& !props.clickedElement.classList.contains("dropdown-toggle")) {
 			console.log('im being called');
 			props.closeNavBar();
 		}
 	},[props.clickedElement]);
 
-	console.log(authContext);
+	console.log(props.clickedElement);
 
 	return (
 		<div ref={ref} className="collapse navbar-collapse" id="collapsedNavItems">

@@ -10,7 +10,7 @@ const Edit = (props) => {
 	// });
 
 	return (
-		<div ref={editRef} className="modal fade" id="editModal" tabIndex="-1" role="dialog" aria-labelledby="editModalCenter"
+		<div className="modal fade" id="editModal" tabIndex="-1" role="dialog" aria-labelledby="editModalCenter"
 		     aria-hidden="true" on>
 			<div className="modal-dialog modal-dialog-centered" role="document">
 				<div className="modal-content">

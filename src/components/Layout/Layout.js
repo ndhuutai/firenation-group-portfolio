@@ -4,7 +4,7 @@ import classes from '../../styles/Layout/Layout.module.css'
 
 const Layout = (props) => {
 	return  (
-		<div className="container-fluid p-0">
+		<div className="container-fluid p-0 bg-light">
 			{props.children}
 		</div>
 	)
