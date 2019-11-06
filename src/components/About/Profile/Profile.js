@@ -7,8 +7,7 @@ const Profile = (props) => (
 			<h5 className="card-title">{props.title}</h5>
 			<p className="card-text">{props.description}</p>
 			<button className="btn btn-link">Show Projects</button>
-			//if user is authenticated then show the edit button
-			{/*<button className="btn btn-danger">Show Projects</button>*/}
+			{props.showEdit && <button className="btn btn-danger">Edit</button>}
 		</div>
 	</div>
 );

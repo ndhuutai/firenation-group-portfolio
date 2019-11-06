@@ -44,11 +44,15 @@ class FAQ extends Component {
 	render() {
 		const titlesArray = this.state.list.map(item => item.title);
 		return (
-			<div className="container-fluid row">
-				<FAQList classes="list-group border-right col-4" list={titlesArray} onListClick={this.onListClick}/>
-				<FAQDescription classes="col-6">{this.state.list[this.state.currentListIndex].description}</FAQDescription>
-					</div>
-					);
+			<>
+				<h2 className="col align-self-center">Frequently Answer Questions</h2>
+				<div className="container-fluid row">
+					<FAQList classes="list-group border-right col-4" list={titlesArray} onListClick={this.onListClick}/>
+					<FAQDescription
+						classes="col-6">{this.state.list[this.state.currentListIndex].description}</FAQDescription>
+				</div>
+			</>
+		);
 	}
 }
 
