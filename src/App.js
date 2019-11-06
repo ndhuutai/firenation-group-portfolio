@@ -50,13 +50,17 @@ class App extends Component {
 					<BrowserRouter>
 						<Layout>
 							<Navigation {...this.state}/>
-							<Switch>
-								<Route path="/about" component={About}/>
-								<Route path="/faq" component={FAQ}/>
-								<Route path="/login" component={LoginPage}/>
-								<Route path="/signup" component={SignUpPage}/>
-								<Route path="/" component={Home}/>
-							</Switch>
+							<div className="row mt-5">
+								<div className="col align-self-center mt-5">
+									<Switch>
+										<Route path="/about" component={About}/>
+										<Route path="/faq" component={FAQ}/>
+										<Route path="/login" component={LoginPage}/>
+										<Route path="/signup" component={SignUpPage}/>
+										<Route path="/" component={Home}/>
+									</Switch>
+								</div>
+							</div>
 						</Layout>
 					</BrowserRouter>
 				</AuthContext.Provider>

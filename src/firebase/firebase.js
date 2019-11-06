@@ -4,4 +4,8 @@ import firebaseConfig from './config/firebaseConfig';
 import "firebase/auth";
 import "firebase/database";
 
-export default firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
+
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION);
+
+export default firebase;

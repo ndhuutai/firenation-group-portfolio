@@ -9,7 +9,6 @@ const SignUpPage = (props) => {
 
 	const onSignUp = (e) => {
 		e.preventDefault();
-		console.log(props);
 		const {email, password} = e.target;
 		setErrorState({status: false, message: ''});
 		firebase.auth().createUserWithEmailAndPassword(email.value, password.value)
@@ -22,7 +21,6 @@ const SignUpPage = (props) => {
 	};
 
 	const displayErrorMessage = () => {
-		console.log(errorState);
 		return <div>There was an error signing you up</div>
 	};
 

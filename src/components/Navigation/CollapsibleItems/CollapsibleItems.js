@@ -21,6 +21,8 @@ const CollapsibleItems = (props) => {
 		}
 	},[props.clickedElement]);
 
+	console.log(authContext);
+
 	return (
 		<div ref={ref} className="collapse navbar-collapse" id="collapsedNavItems">
 			<ul className="navbar-nav mr-auto">
