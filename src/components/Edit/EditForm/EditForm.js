@@ -1,9 +1,9 @@
 import React from 'react';
 
-const EditForm = (WrappedComponent) => {
+const EditForm = (WrappedComponent, formConfigs) => {
 	return (props) => {
 		return (
-			<WrappedComponent formConfigs={props.formConfigs}/>
+			<WrappedComponent formConfigs={formConfigs} {...props}/>
 		)
 	};
 };

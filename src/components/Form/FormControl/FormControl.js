@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FormControl = (props) => {
-	switch (props.elementConfig.elementType) {
+	switch (props.elementType) {
 		case "input":
 			return <input {...props.elementConfig} className={props.classes}/>;
 		case "textarea":

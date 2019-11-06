@@ -45,7 +45,7 @@ class FAQ extends Component {
 		const titlesArray = this.state.list.map(item => item.title);
 		return (
 			<>
-				<h2 className="col align-self-center">Frequently Answer Questions</h2>
+				<h2 className="col align-self-center">Frequently Answered Questions</h2>
 				<div className="container-fluid row">
 					<FAQList classes="list-group border-right col-4" list={titlesArray} onListClick={this.onListClick}/>
 					<FAQDescription

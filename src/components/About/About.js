@@ -33,6 +33,40 @@ const About = (props) => {
 		]
 	});
 
+	const formConfigs = [
+		{
+			labelFor: 'name',
+			labelDescription: 'Name',
+			formControlConfigs: {
+				elementConfig: {
+					id: 'name',
+					name: 'name',
+					onChange: function (e) {
+						//does something with the onChange for this input
+					}
+				},
+				elementType: 'input',
+				classes: "form-control"
+			}
+		},
+		{
+			labelFor: 'description',
+			labelDescription: 'Description: ',
+			formControlConfigs: {
+				elementConfig: {
+					id: 'description',
+					name: 'description',
+					onChange: function (e) {
+						//does something with the onChange for this input
+					}
+				},
+				elementType: 'textarea',
+				classes: 'form-control'
+			}
+		},
+
+	];
+
 
 	const authContext = useContext(AuthContext);
 
@@ -45,7 +79,7 @@ const About = (props) => {
 			<Profile title={'Tai Nguyen'} description={dummyDescription} showEdit={!!authContext.user} editClick={() => onEditClick(1)}/>
 			<Profile title={'Kyle'} description={dummyDescription} showEdit={!!authContext.user} editClick={() => onEditClick(2)}/>
 			<Profile title={'John'} description={dummyDescription} showEdit={!!authContext.user} editClick={() => onEditClick(3)}/>
-			<Edit/>
+			<Edit formConfigs={formConfigs}/>
 		</div>
 	)
 };

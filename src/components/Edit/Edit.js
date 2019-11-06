@@ -1,5 +1,8 @@
 import React, {useRef,useEffect} from 'react';
 
+import EditForm from './EditForm/EditForm';
+import Form from '../Form/Form';
+
 const Edit = (props) => {
 
 	// const editRef = useRef(null);
@@ -9,9 +12,11 @@ const Edit = (props) => {
 	// 	console.log(props);
 	// });
 
+	const EditProfileForm = EditForm(Form, props.formConfigs);
+
 	return (
 		<div className="modal fade" id="editModal" tabIndex="-1" role="dialog" aria-labelledby="editModalCenter"
-		     aria-hidden="true" on>
+		     aria-hidden="true">
 			<div className="modal-dialog modal-dialog-centered" role="document">
 				<div className="modal-content">
 					<div className="modal-header">
@@ -22,9 +27,7 @@ const Edit = (props) => {
 					</div>
 
 					<div className="modal-body">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab ad dolor doloribus eos eum
-						eveniet hic modi nisi numquam odio omnis optio placeat, possimus quis quod recusandae
-						repellendus sunt voluptate.
+						<EditProfileForm/>
 					</div>
 					<div className="modal-footer">
 						<button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>

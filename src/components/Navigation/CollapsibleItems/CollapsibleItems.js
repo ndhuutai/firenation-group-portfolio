@@ -17,12 +17,10 @@ const CollapsibleItems = (props) => {
 	useEffect(() => {
 		if(ref.current.classList.contains("show") && !props.clickedElement.classList.contains("navbar-toggler-icon")
 		&& !props.clickedElement.classList.contains("dropdown-toggle")) {
-			console.log('im being called');
 			props.closeNavBar();
 		}
 	},[props.clickedElement]);
 
-	console.log(props.clickedElement);
 
 	return (
 		<div ref={ref} className="collapse navbar-collapse" id="collapsedNavItems">

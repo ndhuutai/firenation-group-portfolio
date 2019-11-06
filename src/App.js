@@ -50,7 +50,7 @@ class App extends Component {
 					<BrowserRouter>
 						<Layout>
 							<Navigation {...this.state}/>
-							<div className="row mt-5">
+							<div className="row mt-5 ml-0 mr-0">
 								<div className="col align-self-center mt-5">
 									<Switch>
 										<Route path="/about" component={About}/>
