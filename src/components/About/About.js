@@ -42,7 +42,7 @@ const About = (props) => {
 					id: 'name',
 					name: 'name',
 					onChange: function (e) {
-						//does something with the onChange for this input
+						console.log(dataState)
 					}
 				},
 				elementType: 'input',
@@ -57,7 +57,7 @@ const About = (props) => {
 					id: 'description',
 					name: 'description',
 					onChange: function (e) {
-						//does something with the onChange for this input
+						console.log(dataState, 'im changing here');
 					}
 				},
 				elementType: 'textarea',
@@ -73,6 +73,8 @@ const About = (props) => {
 	const onEditClick = (profileId) => {
 		//edit the profile and send to db to store
 	};
+
+	console.log(props);
 
 	return (
 		<div className="row align-items-center h-75">

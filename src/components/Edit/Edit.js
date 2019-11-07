@@ -1,16 +1,9 @@
-import React, {useRef,useEffect} from 'react';
+import React from 'react';
 
 import EditForm from './EditForm/EditForm';
 import Form from '../Form/Form';
 
 const Edit = (props) => {
-
-	// const editRef = useRef(null);
-	//
-	// useEffect(() => {
-	// 	console.log(editRef.current.classList); // watch for show attribute on class list
-	// 	console.log(props);
-	// });
 
 	const EditProfileForm = EditForm(Form, props.formConfigs);
 
@@ -20,7 +13,7 @@ const Edit = (props) => {
 			<div className="modal-dialog modal-dialog-centered" role="document">
 				<div className="modal-content">
 					<div className="modal-header">
-						<h5 className="modal-title" id="editModalLabel">Edit form</h5>
+						<h5 className="modal-title" id="editModalLabel">Edit profile</h5>
 						<button type="button" className="close" data-dismiss="modal" aria-label="close">
 							<span aria-hidden="true">&times;</span>
 						</button>

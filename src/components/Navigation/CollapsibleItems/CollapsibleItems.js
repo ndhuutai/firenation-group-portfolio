@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useContext} from 'react';
+import React, {useRef, useEffect, useContext, forwardRef} from 'react';
 import {NavLink} from 'react-router-dom';
 
 import CollapsibleItem from './CollapsibleItem/CollapsibleItem';
@@ -8,18 +8,20 @@ import AuthContext from '../../../contexts/App/AuthContext';
 
 import classes from '../../../styles/Navigation/CollapsibleItems/CollapsibleItems.module.scss';
 
-const CollapsibleItems = (props) => {
+const CollapsibleItems = (props, ref) => {
 
-	const ref = useRef(null);
+	// const ref = useRef(null);
 	const authContext = useContext(AuthContext);
+
 	//whenever a click is outside/not the hamburger button
 	//close the navbar by simulating a click after the re-render has completed.
-	useEffect(() => {
-		if(ref.current.classList.contains("show") && !props.clickedElement.classList.contains("navbar-toggler-icon")
-		&& !props.clickedElement.classList.contains("dropdown-toggle")) {
-			props.closeNavBar();
-		}
-	},[props.clickedElement]);
+	// useEffect(() => {
+	// 	if(ref.current.classList.contains("show") && !props.clickedElement.classList.contains("navbar-toggler-icon")
+	// 	&& !props.clickedElement.classList.contains("dropdown-toggle")) {
+	// 		console.log('calling!!!!');
+	// 		props.closeNavBar();
+	// 	}
+	// },[props.clickedElement]);
 
 
 	return (
@@ -38,4 +40,4 @@ const CollapsibleItems = (props) => {
 	)
 };
 
-export default CollapsibleItems;
+export default forwardRef(CollapsibleItems);

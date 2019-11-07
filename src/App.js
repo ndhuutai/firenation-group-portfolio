@@ -1,4 +1,4 @@
-import React, {Component } from 'react';
+import React, {Component, createRef} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 
 import 'bootstrap';
@@ -23,13 +23,11 @@ class App extends Component {
 	state = {
 		user: null,
 		//used to pass on the clicked element to close navbar
-		clickedElement : null
+		clickedElement: null
 	};
 
-	// shouldComponentUpdate(nextProps, nextState, nextContext) {
-	// 	//shallow check the user object
-	// 	return this.state.user !== nextState.user;
-	// }
+	navRef = createRef();
+	collapsedRef = createRef();
 
 	componentDidMount() {
 		firebase.auth().onAuthStateChanged(user => {
@@ -38,9 +36,9 @@ class App extends Component {
 	}
 
 	onClickHandler = (e) => {
-		this.setState({
-			clickedElement: e.target
-		})
+		if (this.collapsedRef.current.classList.contains('show') && !e.target.classList.contains('dropdown-toggle')) {
+			this.navRef.current.click();
+		}
 	};
 
 	render() {
@@ -49,7 +47,7 @@ class App extends Component {
 				<AuthContext.Provider value={{user: this.state.user}}>
 					<BrowserRouter>
 						<Layout>
-							<Navigation {...this.state}/>
+							<Navigation navRef={this.navRef} collapsedRef={this.collapsedRef}/>
 							<div className="row mt-5 ml-0 mr-0">
 								<div className="col align-self-center mt-5">
 									<Switch>
@@ -68,4 +66,5 @@ class App extends Component {
 		);
 	}
 }
+
 export default App;

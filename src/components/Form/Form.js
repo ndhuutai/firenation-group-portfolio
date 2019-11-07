@@ -6,7 +6,7 @@ const Form = (props) => {
 		<form>
 			{props.formConfigs.map(config => {
 				return (
-					<FormGroup {...config}/>
+					<FormGroup {...config} key={config.labelFor}/>
 				)
 			})}
 		</form>
