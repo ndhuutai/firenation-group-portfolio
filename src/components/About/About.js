@@ -1,6 +1,6 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {Route} from 'react-router-dom';
-
+import firebase from '../../firebase/firebase';
 // import classes from '../../styles/About/About.module.css';
 
 import Profile from './Profile/Profile';
@@ -32,42 +32,17 @@ const About = (props) => {
 		]
 	);
 
+
+
 	const [editState, setEditState] = useState({
 		profileId: -1
 	});
 
-	console.log(editState);
-
-	const formConfigs = [
-		{
-			labelFor: 'name',
-			labelDescription: 'Name',
-			formControlConfigs: {
-				elementConfig: {
-					id: 'name',
-					name: 'name',
-				},
-				elementType: 'input',
-				classes: 'form-control'
-			}
-		},
-		{
-			labelFor: 'description',
-			labelDescription: 'Description: ',
-			formControlConfigs: {
-				elementConfig: {
-					id: 'description',
-					name: 'description',
-				},
-				elementType: 'textarea',
-				classes: 'form-control'
-			}
-		},
-
-	];
-
-
 	const authContext = useContext(AuthContext);
+
+	useEffect(() => {
+
+	});
 
 	const onEditClick = (profileId) => {
 		setEditState({
@@ -100,7 +75,7 @@ const About = (props) => {
 					         onEdit={() => onEditClick(profile.profileId)} key={profile.name}/>
 				)
 			})}
-			<Edit formConfigs={formConfigs} onSubmit={onSubmit}/>
+			<Edit onSubmit={onSubmit}/>
 		</div>
 	)
 };

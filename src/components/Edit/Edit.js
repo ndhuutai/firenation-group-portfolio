@@ -1,4 +1,5 @@
 import React, {useRef} from 'react';
+import PropTypes from 'prop-types';
 
 import EditFormModal from './EditForm/EditFormModal';
 import Form from '../Form/Form';
@@ -23,8 +24,35 @@ const Edit = (props) => {
 		}
 	];
 
-	const EditProfileForm = EditFormModal(Form, props.formConfigs, buttonConfigs);
+	const formConfigs = [
+		{
+			labelFor: 'name',
+			labelDescription: 'Name',
+			formControlConfigs: {
+				elementConfig: {
+					id: 'name',
+					name: 'name',
+				},
+				elementType: 'input',
+				classes: 'form-control'
+			}
+		},
+		{
+			labelFor: 'description',
+			labelDescription: 'Description: ',
+			formControlConfigs: {
+				elementConfig: {
+					id: 'description',
+					name: 'description',
+				},
+				elementType: 'textarea',
+				classes: 'form-control'
+			}
+		},
 
+	];
+
+	const EditProfileForm = EditFormModal(Form, formConfigs, buttonConfigs);
 
 	const closeButtonRef = useRef(null);
 
@@ -39,18 +67,17 @@ const Edit = (props) => {
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-
 					<div className="modal-body">
 						<EditProfileForm onSubmit={props.onSubmit} closeModal={() => closeButtonRef.current.click()}/>
 					</div>
-					{/*<div className="modal-footer">*/}
-					{/*	<button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>*/}
-					{/*	<button type="button" className="btn btn-primary" onClick={onFormSubmit}>Save changes</button>*/}
-					{/*</div>*/}
 				</div>
 			</div>
 		</div>
 	)
+};
+
+Edit.propTypes = {
+	onSubmit : PropTypes.func.isRequired
 };
 
 export default Edit;

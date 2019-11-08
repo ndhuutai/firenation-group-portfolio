@@ -1,5 +1,9 @@
 import React, {forwardRef} from 'react';
+import PropTypes from 'prop-types';
+
 import FormGroup from './FormGroup/FormGroup';
+
+
 
 const Form = (props) => {
 
@@ -37,6 +41,17 @@ const Form = (props) => {
 			})}
 		</form>
 	)
+};
+
+
+Form.propTypes = {
+	onSubmit: PropTypes.func.isRequired,
+	formConfigs: PropTypes.object.isRequired,
+	buttonConfigs: PropTypes.shape({
+		type: PropTypes.string.isRequired,
+		name: PropTypes.string.isRequired,
+		className: PropTypes.string.isRequired
+	})
 };
 
 export default forwardRef(Form);
