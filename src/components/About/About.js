@@ -33,6 +33,10 @@ const About = (props) => {
 		]
 	});
 
+	const [editState, setEditState] = useState({
+		id: -1
+	});
+
 	const formConfigs = [
 		{
 			labelFor: 'name',
@@ -41,12 +45,9 @@ const About = (props) => {
 				elementConfig: {
 					id: 'name',
 					name: 'name',
-					onChange: function (e) {
-						console.log(dataState)
-					}
 				},
 				elementType: 'input',
-				classes: "form-control"
+				classes: 'form-control'
 			}
 		},
 		{
@@ -56,9 +57,6 @@ const About = (props) => {
 				elementConfig: {
 					id: 'description',
 					name: 'description',
-					onChange: function (e) {
-						console.log(dataState, 'im changing here');
-					}
 				},
 				elementType: 'textarea',
 				classes: 'form-control'
@@ -71,17 +69,33 @@ const About = (props) => {
 	const authContext = useContext(AuthContext);
 
 	const onEditClick = (profileId) => {
-		//edit the profile and send to db to store
+		setEditState({
+			id: profileId
+		})
 	};
 
-	console.log(props);
+	const onSubmit = ({name, description}) => {
+		dataState.profiles.map(profile => {
+			if (profile.id === editState.id) {
+				return {
+					...profile,
+					name,
+					description
+				}
+			}
+			return profile;
+		})
+	};
 
 	return (
 		<div className="row align-items-center h-75">
-			<Profile title={'Tai Nguyen'} description={dummyDescription} showEdit={!!authContext.user} editClick={() => onEditClick(1)}/>
-			<Profile title={'Kyle'} description={dummyDescription} showEdit={!!authContext.user} editClick={() => onEditClick(2)}/>
-			<Profile title={'John'} description={dummyDescription} showEdit={!!authContext.user} editClick={() => onEditClick(3)}/>
-			<Edit formConfigs={formConfigs}/>
+			{dataState.profiles.map(profile => {
+				return (
+					<Profile title={profile.name} description={profile.description} showEdit={!!authContext.user}
+					         onEdit={() => onEditClick(profile.id)} key={profile.name}/>
+				)
+			})}
+			<Edit formConfigs={formConfigs} onSubmit={onSubmit}/>
 		</div>
 	)
 };

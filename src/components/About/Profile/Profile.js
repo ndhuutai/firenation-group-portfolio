@@ -8,7 +8,7 @@ const Profile = (props) => (
 			<p className="card-text">{props.description}</p>
 			<button className="btn btn-link">Show Projects</button>
 			{props.showEdit && <button className="btn btn-danger" data-toggle="modal" data-target="#editModal"
-			onClick={props.editClick}>Edit</button>}
+			onClick={props.onEdit}>Edit</button>}
 		</div>
 	</div>
 );
