@@ -10,8 +10,7 @@ import Edit from '../Edit/Edit';
 const dummyDescription = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi consectetur cum ex explicabo incidunt laboriosam neque numquam obcaecati, officiis quam repellendus saepe tempore! Delectus deserunt ipsam sit tempore, veritatis voluptatum.'
 const About = (props) => {
 
-	const [dataState, setDataState] = useState({
-		profiles: [
+	const [dataState, setDataState] = useState([
 			{
 				profileId: 1,
 				name: 'Tai Nguyen',
@@ -31,11 +30,13 @@ const About = (props) => {
 				description: dummyDescription
 			}
 		]
-	});
+	);
 
 	const [editState, setEditState] = useState({
-		id: -1
+		profileId: -1
 	});
+
+	console.log(editState);
 
 	const formConfigs = [
 		{
@@ -70,13 +71,15 @@ const About = (props) => {
 
 	const onEditClick = (profileId) => {
 		setEditState({
-			id: profileId
+			profileId
 		})
 	};
 
 	const onSubmit = ({name, description}) => {
-		dataState.profiles.map(profile => {
-			if (profile.id === editState.id) {
+
+
+		let result = dataState.map(profile => {
+			if (profile.profileId === editState.profileId) {
 				return {
 					...profile,
 					name,
@@ -84,15 +87,17 @@ const About = (props) => {
 				}
 			}
 			return profile;
-		})
+		});
+
+		setDataState(result);
 	};
 
 	return (
 		<div className="row align-items-center h-75">
-			{dataState.profiles.map(profile => {
+			{dataState.map(profile => {
 				return (
 					<Profile title={profile.name} description={profile.description} showEdit={!!authContext.user}
-					         onEdit={() => onEditClick(profile.id)} key={profile.name}/>
+					         onEdit={() => onEditClick(profile.profileId)} key={profile.name}/>
 				)
 			})}
 			<Edit formConfigs={formConfigs} onSubmit={onSubmit}/>

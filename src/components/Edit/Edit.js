@@ -28,10 +28,6 @@ const Edit = (props) => {
 
 	const closeButtonRef = useRef(null);
 
-
-	const onFormSubmit = (e) => {
-	};
-
 	return (
 		<div className="modal fade" id="editModal" tabIndex="-1" role="dialog" aria-labelledby="editModalCenter"
 		     aria-hidden="true">

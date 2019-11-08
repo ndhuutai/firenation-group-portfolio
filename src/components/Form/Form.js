@@ -13,8 +13,14 @@ const Form = (props) => {
 		}),[]);
 
 		//call the onSubmit passed from parent
-		inputNames.forEach(name => console.log(name));
-		props.onSubmit();
+		const data = inputNames.reduce((resultObj, currentInputName) => {
+			return {
+				...resultObj,
+				[currentInputName]: e.target[currentInputName].value
+			}
+		}, {});
+
+		props.onSubmit(data);
 	};
 
 	return (
