@@ -4,23 +4,22 @@ import PropTypes from 'prop-types';
 import FormGroup from './FormGroup/FormGroup';
 
 
-
 const Form = (props) => {
 
 	const onSubmit = (e) => {
 		e.preventDefault();
-		const inputNames = props.formConfigs.reduce(((config,currentConfig) => {
+		const inputNames = props.formConfigs.reduce(((config, currentConfig) => {
 			return [
 				...config,
 				currentConfig.formControlConfigs.elementConfig.name
 			]
-		}),[]);
+		}), []);
 
 		//call the onSubmit passed from parent
 		const data = inputNames.reduce((resultObj, currentInputName) => {
 			return {
 				...resultObj,
-				[currentInputName]: e.target[currentInputName].value
+				[currentInputName]: e.target[currentInputName].getAttribute('type') !== 'file' ? e.target[currentInputName].value : e.target[currentInputName].files[0]
 			}
 		}, {});
 

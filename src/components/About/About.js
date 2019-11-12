@@ -5,26 +5,27 @@ import firebase from '../../firebase/firebase';
 
 import Profile from './Profile/Profile';
 import AuthContext from '../../contexts/App/AuthContext';
+import DbContext from '../../contexts/App/DbContext';
+
 import Edit from '../Edit/Edit';
 
 const dummyDescription = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi consectetur cum ex explicabo incidunt laboriosam neque numquam obcaecati, officiis quam repellendus saepe tempore! Delectus deserunt ipsam sit tempore, veritatis voluptatum.'
 const About = (props) => {
-
 	const [dataState, setDataState] = useState([
 			{
-				profileId: 1,
+				profileId: 0,
 				name: 'Tai Nguyen',
 				avatar: 'https://via.placeholder.com/200',
 				description: dummyDescription
 			},
 			{
-				profileId: 2,
+				profileId: 1,
 				name: 'Kyle',
 				avatar: 'https://via.placeholder.com/200',
 				description: dummyDescription
 			},
 			{
-				profileId: 3,
+				profileId: 2,
 				name: 'John',
 				avatar: 'https://via.placeholder.com/200',
 				description: dummyDescription
@@ -32,26 +33,25 @@ const About = (props) => {
 		]
 	);
 
-
-
 	const [editState, setEditState] = useState({
-		profileId: -1
+		profileId: -1,
+		name: '',
+		description:''
 	});
 
 	const authContext = useContext(AuthContext);
+	const dbContext = useContext(DbContext);
 
-	useEffect(() => {
 
-	});
 
 	const onEditClick = (profileId) => {
-		setEditState({
-			profileId
-		})
+		const profileData = dataState.find(profile => profile.profileId === profileId);
+		setEditState(profileData);
 	};
 
-	const onSubmit = ({name, description}) => {
+	const onSubmit = ({name, description, avatar}) => {
 
+		console.log(avatar, 'AVATAR');
 
 		let result = dataState.map(profile => {
 			if (profile.profileId === editState.profileId) {
@@ -62,6 +62,11 @@ const About = (props) => {
 				}
 			}
 			return profile;
+		});
+
+		dbContext.dbConnection.ref(`profiles/${editState.profileId}`).set({
+			name,
+			description
 		});
 
 		setDataState(result);
@@ -75,7 +80,7 @@ const About = (props) => {
 					         onEdit={() => onEditClick(profile.profileId)} key={profile.name}/>
 				)
 			})}
-			<Edit onSubmit={onSubmit}/>
+			<Edit onSubmit={onSubmit} profileData={editState}/>
 		</div>
 	)
 };

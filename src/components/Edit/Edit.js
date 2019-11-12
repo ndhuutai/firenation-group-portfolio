@@ -32,6 +32,7 @@ const Edit = (props) => {
 				elementConfig: {
 					id: 'name',
 					name: 'name',
+					defaultValue: props.profileData.name || ''
 				},
 				elementType: 'input',
 				classes: 'form-control'
@@ -44,12 +45,26 @@ const Edit = (props) => {
 				elementConfig: {
 					id: 'description',
 					name: 'description',
+					defaultValue: props.profileData.description || ''
 				},
 				elementType: 'textarea',
 				classes: 'form-control'
 			}
 		},
-
+		{
+			labelFor: 'avatar',
+			labelDescription: 'Upload your avatar: ',
+			formControlConfigs: {
+				elementConfig: {
+					id: 'avatar',
+					name: 'avatar',
+					type: 'file',
+					accept: 'image/png, image/jpeg'
+				},
+				elementType: 'input',
+				classes: 'form-control',
+			}
+		}
 	];
 
 	const EditProfileForm = EditFormModal(Form, formConfigs, buttonConfigs);

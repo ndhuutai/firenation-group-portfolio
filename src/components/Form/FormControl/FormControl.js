@@ -11,7 +11,7 @@ const FormControl = (props) => {
 };
 
 FormControl.propTypes = {
-	elementType: PropTypes.oneOf('input', 'textarea','select','button'),
+	elementType: PropTypes.oneOf(['input', 'textarea','select','button']),
 	elementConfig: PropTypes.shape({
 		id: PropTypes.string.isRequired,
 		name: PropTypes.string.isRequired
