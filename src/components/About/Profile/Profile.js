@@ -15,4 +15,12 @@ const Profile = (props) => (
 	</div>
 );
 
+Profile.propTypes = {
+	name: PropTypes.string.isRequired,
+	description: PropTypes.string.isRequired,
+	portfolioLink: PropTypes.string.isRequired,
+	showEdit: PropTypes.bool.isRequired,
+	onEdit: PropTypes.func.isRequired
+};
+
 export default Profile;
