@@ -52,6 +52,19 @@ const Edit = (props) => {
 			}
 		},
 		{
+			labelFor: 'portfolioLink',
+			labelDescription: 'Portfolio Link: ',
+			formControlConfigs: {
+				elementConfig: {
+					id: 'portfolioLink',
+					name: 'portfolioLink',
+					defaultValue: props.profileData.portfolioLink || ''
+				},
+				elementType: 'input',
+				classes: 'form-control'
+			}
+		},
+		{
 			labelFor: 'avatar',
 			labelDescription: 'Upload your avatar: ',
 			formControlConfigs: {

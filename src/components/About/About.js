@@ -10,87 +10,106 @@ import StorageContext from '../../contexts/App/StorageContext';
 
 import Edit from '../Edit/Edit';
 
-const dummyDescription = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi consectetur cum ex explicabo incidunt laboriosam neque numquam obcaecati, officiis quam repellendus saepe tempore! Delectus deserunt ipsam sit tempore, veritatis voluptatum.'
 const About = (props) => {
-	const [dataState, setDataState] = useState([
-			{
-				profileId: 0,
-				name: 'Tai Nguyen',
-				avatar: 'https://via.placeholder.com/200',
-				portfolioLink: '',
-				description: dummyDescription
-			},
-			{
-				profileId: 1,
-				name: 'Kyle',
-				avatar: 'https://via.placeholder.com/200',
-				portfolioLink: '',
-				description: dummyDescription
-			},
-			{
-				profileId: 2,
-				name: 'John',
-				avatar: 'https://via.placeholder.com/200',
-				portfolioLink: '',
-				description: dummyDescription
-			}
-		]
+	const [dataState, setDataState] = useState(
 	);
 
 	const [editState, setEditState] = useState({
 		profileId: -1,
 		name: '',
+		avatar:'',
+		portfolioLink: '',
 		description:''
 	});
+
+	const [loadingState, setLoadingState] = useState(true);
 
 	const authContext = useContext(AuthContext);
 	const dbContext = useContext(DbContext);
 	const storageContext = useContext(StorageContext);
 
 
+	useEffect(()=> {
+		dbContext.dbConnection.ref('profiles/').on('value', (snapshot) => {
+			console.log(snapshot.val());
+			const resultArray = Object.keys(snapshot.val()).map(key => {
+				return {
+					profileId: key,
+					...snapshot.val()[key]
+				}
+			});
+			setDataState(resultArray);
+			setLoadingState(false);
+		});
+	},[]);
+
 
 	const onEditClick = (profileId) => {
 		const profileData = dataState.find(profile => profile.profileId === profileId);
+		console.log(profileData);
 		setEditState(profileData);
 	};
 
-	const onSubmit = ({name, description, avatar}) => {
+	const onSubmit = ({name, description, avatar, portfolioLink}) => {
 
-		dbContext.dbConnection.ref(`profiles/${editState.profileId}`).set({
+		//get existing profilekey, if it doesn't exist then new key is needed.
+		let profileKey = dbContext.dbConnection.ref().child(`profiles/${editState.profileId}`).key;
+
+		if(!profileKey) {
+			profileKey = dbContext.dbConnection.ref().child('profiles').push().key;
+		}
+
+
+		// UPDATE CONSTRUCTION
+		const updatedProfile = {
 			name,
 			description,
-			avatarRef: `avatars/${editState.profileId}/${avatar.name}`
-		});
+			avatar : avatar? `avatars/${profileKey}/${avatar.name}` : editState.avatar,
+			portfolioLink
+		};
+
+		const updates = {};
+		updates['/profiles/' + profileKey] = updatedProfile;
+
+		dbContext.dbConnection.ref().update(updates);
 
 		const storageRef = storageContext.storage.ref();
-		const avatarsRef = storageRef.child(`avatars/${editState.profileId}/${avatar.name}`);
 
-		avatarsRef.put(avatar);
+		//
+		//if there is a submitted avatar, then user wants to override the existing data
+		//if not then move on.
+		if(avatar) {
+			const avatarsRef = storageRef.child(`avatars/${editState.profileId}/${avatar.name}`);
+			avatarsRef.put(avatar);
+		}
 
+		//UPDATE LOCAL STATE
 		let result = dataState.map(profile => {
 			if (profile.profileId === editState.profileId) {
 				return {
 					...profile,
 					name,
-					avatarRef: `avatars/${profile.profileId}/${avatar.name}`,
+					avatar: avatar? `avatars/${editState.profileId}/${avatar.name}` :editState.avatar,
+					portfolioLink,
 					description
 				}
 			}
 			return profile;
 		});
 
-
 		setDataState(result);
 	};
 
 	return (
 		<div className="row align-items-center h-75">
-			{dataState.map(profile => {
-				return (
-					<Profile title={profile.name} description={profile.description} showEdit={!!authContext.user}
-					         onEdit={() => onEditClick(profile.profileId)} key={profile.name}/>
-				)
-			})}
+			{loadingState? <h3>We're loading your data</h3>
+			:
+				dataState.map(profile => {
+					return (
+						<Profile {...profile} showEdit={!!authContext.user}
+						         onEdit={() => onEditClick(profile.profileId)} key={profile.name + profile.profileId}/>
+					)
+				})}
 			<Edit onSubmit={onSubmit} profileData={editState}/>
 		</div>
 	)
