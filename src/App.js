@@ -14,6 +14,7 @@ import Spacer from './components/spacer/Spacer';
 import firebase from './firebase/firebase';
 import AuthContext from './contexts/App/AuthContext';
 import DbContext from './contexts/App/DbContext';
+import StorageContext from './contexts/App/StorageContext';
 
 import './styles/custom.scss';
 import SignUpPage from './components/Login/SignUp/SignUpPage';
@@ -49,17 +50,19 @@ class App extends Component {
 						<Layout>
 							<Navigation navRef={this.navRef} collapsedRef={this.collapsedRef}/>
 							<DbContext.Provider value={{dbConnection: firebase.database()}}>
-								<div className="row mt-5 ml-0 mr-0">
-									<div className="col align-self-center mt-5">
-										<Switch>
-											<Route path="/about" component={About}/>
-											<Route path="/faq" component={FAQ}/>
-											<Route path="/login" component={LoginPage}/>
-											<Route path="/signup" component={SignUpPage}/>
-											<Route path="/" component={Home}/>
-										</Switch>
+								<StorageContext.Provider value={{storage: firebase.storage()}}>
+									<div className="row mt-5 ml-0 mr-0">
+										<div className="col align-self-center mt-5">
+											<Switch>
+												<Route path="/about" component={About}/>
+												<Route path="/faq" component={FAQ}/>
+												<Route path="/login" component={LoginPage}/>
+												<Route path="/signup" component={SignUpPage}/>
+												<Route path="/" component={Home}/>
+											</Switch>
+										</div>
 									</div>
-								</div>
+								</StorageContext.Provider>
 							</DbContext.Provider>
 						</Layout>
 					</BrowserRouter>

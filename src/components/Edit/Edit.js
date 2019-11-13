@@ -10,7 +10,7 @@ const Edit = (props) => {
 		{
 			type: 'button',
 			name: 'close',
-			className: 'btn btn-secondary',
+			className: 'btn btn-secondary m-1',
 			['data-dismiss']: 'modal',
 		},
 		{

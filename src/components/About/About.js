@@ -6,6 +6,7 @@ import firebase from '../../firebase/firebase';
 import Profile from './Profile/Profile';
 import AuthContext from '../../contexts/App/AuthContext';
 import DbContext from '../../contexts/App/DbContext';
+import StorageContext from '../../contexts/App/StorageContext';
 
 import Edit from '../Edit/Edit';
 
@@ -16,18 +17,21 @@ const About = (props) => {
 				profileId: 0,
 				name: 'Tai Nguyen',
 				avatar: 'https://via.placeholder.com/200',
+				portfolioLink: '',
 				description: dummyDescription
 			},
 			{
 				profileId: 1,
 				name: 'Kyle',
 				avatar: 'https://via.placeholder.com/200',
+				portfolioLink: '',
 				description: dummyDescription
 			},
 			{
 				profileId: 2,
 				name: 'John',
 				avatar: 'https://via.placeholder.com/200',
+				portfolioLink: '',
 				description: dummyDescription
 			}
 		]
@@ -41,6 +45,7 @@ const About = (props) => {
 
 	const authContext = useContext(AuthContext);
 	const dbContext = useContext(DbContext);
+	const storageContext = useContext(StorageContext);
 
 
 
@@ -51,23 +56,29 @@ const About = (props) => {
 
 	const onSubmit = ({name, description, avatar}) => {
 
-		console.log(avatar, 'AVATAR');
+		dbContext.dbConnection.ref(`profiles/${editState.profileId}`).set({
+			name,
+			description,
+			avatarRef: `avatars/${editState.profileId}/${avatar.name}`
+		});
+
+		const storageRef = storageContext.storage.ref();
+		const avatarsRef = storageRef.child(`avatars/${editState.profileId}/${avatar.name}`);
+
+		avatarsRef.put(avatar);
 
 		let result = dataState.map(profile => {
 			if (profile.profileId === editState.profileId) {
 				return {
 					...profile,
 					name,
+					avatarRef: `avatars/${profile.profileId}/${avatar.name}`,
 					description
 				}
 			}
 			return profile;
 		});
 
-		dbContext.dbConnection.ref(`profiles/${editState.profileId}`).set({
-			name,
-			description
-		});
 
 		setDataState(result);
 	};
