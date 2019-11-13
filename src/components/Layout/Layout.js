@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import classes from '../../styles/Layout/Layout.module.css'
 
@@ -8,6 +9,10 @@ const Layout = (props) => {
 			{props.children}
 		</div>
 	)
+};
+
+Layout.propTypes = {
+	children: PropTypes.element
 };
 
 export default Layout;
