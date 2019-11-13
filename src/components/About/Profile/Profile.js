@@ -27,7 +27,7 @@ const Profile = (props) => {
 	}, [props]);
 
 	return (
-		<div className="card col-md border-0">
+		<div className="card col-md border-0 bg-transparent">
 			<img className="w-50 m-auto rounded" src={imageState.imgSrc} alt="team member"/>
 			<div className="card-body">
 				<h5 className="card-title">{props.name}</h5>

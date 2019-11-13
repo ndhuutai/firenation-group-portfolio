@@ -24,6 +24,8 @@ const About = (props) => {
 
 	const [loadingState, setLoadingState] = useState(true);
 
+	const [errorState, setErrorState] = useState({});
+
 	const authContext = useContext(AuthContext);
 	const dbContext = useContext(DbContext);
 	const storageContext = useContext(StorageContext);
@@ -71,7 +73,9 @@ const About = (props) => {
 		const updates = {};
 		updates['/profiles/' + profileKey] = updatedProfile;
 
-		dbContext.dbConnection.ref().update(updates);
+		dbContext.dbConnection.ref().update(updates, (error) => {
+			setErrorState(error);
+		});
 
 		const storageRef = storageContext.storage.ref();
 
@@ -101,7 +105,7 @@ const About = (props) => {
 	};
 
 	return (
-		<div className="row align-items-center h-75">
+		<div className="row align-items-start h-75">
 			{loadingState? <h3>We're loading your data</h3>
 			:
 				dataState.map(profile => {
