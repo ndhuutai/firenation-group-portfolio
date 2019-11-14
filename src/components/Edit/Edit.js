@@ -17,6 +17,9 @@ const Edit = (props) => {
 			type: 'submit',
 			name: 'Save changes',
 			className: 'btn btn-primary',
+			//todo: for progressBar modal
+			['data-toggle']: 'modal',
+			['data-target']: 'progressModal',
 			// ['data-dismiss']: 'modal',
 			onClick: function (e) {
 				console.log('click');

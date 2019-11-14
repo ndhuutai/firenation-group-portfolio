@@ -1,5 +1,7 @@
 import React from 'react';
 
+import withModal from '../../HOC/Modal/withModal';
+
 const EditFormModal = (WrappedComponent, formConfigs, buttonConfigs) => {
 
 	return (props) => {

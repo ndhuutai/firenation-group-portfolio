@@ -7,6 +7,8 @@ import Profile from './Profile/Profile';
 import AuthContext from '../../contexts/App/AuthContext';
 import DbContext from '../../contexts/App/DbContext';
 import StorageContext from '../../contexts/App/StorageContext';
+import withModal from '../HOC/Modal/withModal';
+import ProgressBar from '../ProgressBar/ProgressBar';
 
 import Edit from '../Edit/Edit';
 
@@ -23,6 +25,11 @@ const About = (props) => {
 	});
 
 	const [loadingState, setLoadingState] = useState(true);
+	//todo: progress bar
+	const [uploadingState, setUploadingState] = useState({
+		status: false,
+		progressVal : 0
+	});
 
 	const [errorState, setErrorState] = useState({});
 
@@ -82,9 +89,25 @@ const About = (props) => {
 		//
 		//if there is a submitted avatar, then user wants to override the existing data
 		//if not then move on.
+		let updateTask = null;
 		if(avatar) {
 			const avatarsRef = storageRef.child(`avatars/${editState.profileId}/${avatar.name}`);
-			avatarsRef.put(avatar);
+			updateTask = avatarsRef.put(avatar);
+
+			//todo: watch for progress then update value for progress bar.
+			updateTask.on('state_changed', (snapshot) => {
+				let progressVal = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				//set progress bar to bytes transferred.
+				//set uploadingState to true to display progress bar
+				console.log(progressVal);
+				setUploadingState({
+					status: progressVal < 100,
+					progressVal
+				});
+			}, error => {
+				console.log('error uploading image');
+			})
+
 		}
 
 		//UPDATE LOCAL STATE
@@ -103,6 +126,9 @@ const About = (props) => {
 
 		setDataState(result);
 	};
+
+	//todo: add ProgressBar Modal
+	const ProgressBarWithModal = withModal(ProgressBar);
 
 	return (
 		<div className="row align-items-start h-75">
