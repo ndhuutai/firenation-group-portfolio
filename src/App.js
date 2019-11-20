@@ -48,22 +48,24 @@ class App extends Component {
 				<AuthContext.Provider value={{user: this.state.user}}>
 					<BrowserRouter>
 						<Layout>
-							<Navigation navRef={this.navRef} collapsedRef={this.collapsedRef}/>
-							<DbContext.Provider value={{dbConnection: firebase.database()}}>
-								<StorageContext.Provider value={{storage: firebase.storage()}}>
-									<div className="row mt-5 ml-0 mr-0">
-										<div className="col align-self-center mt-5">
-											<Switch>
-												<Route path="/about" component={About}/>
-												<Route path="/faq" component={FAQ}/>
-												<Route path="/login" component={LoginPage}/>
-												<Route path="/signup" component={SignUpPage}/>
-												<Route path="/" component={Home}/>
-											</Switch>
+							<>
+								<Navigation navRef={this.navRef} collapsedRef={this.collapsedRef}/>
+								<DbContext.Provider value={{dbConnection: firebase.database()}}>
+									<StorageContext.Provider value={{storage: firebase.storage()}}>
+										<div className="row mt-5 ml-0 mr-0">
+											<div className="col align-self-center mt-5">
+												<Switch>
+													<Route path="/about" component={About}/>
+													<Route path="/faq" component={FAQ}/>
+													<Route path="/login" component={LoginPage}/>
+													<Route path="/signup" component={SignUpPage}/>
+													<Route path="/" component={Home}/>
+												</Switch>
+											</div>
 										</div>
-									</div>
-								</StorageContext.Provider>
-							</DbContext.Provider>
+									</StorageContext.Provider>
+								</DbContext.Provider>
+							</>
 						</Layout>
 					</BrowserRouter>
 				</AuthContext.Provider>

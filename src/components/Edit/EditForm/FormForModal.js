@@ -2,7 +2,7 @@ import React from 'react';
 
 import withModal from '../../HOC/Modal/withModal';
 
-const EditFormModal = (WrappedComponent, formConfigs, buttonConfigs) => {
+const FormForModal = (WrappedComponent, formConfigs, buttonConfigs) => {
 
 	return (props) => {
 		//require a closeModal function
@@ -18,4 +18,4 @@ const EditFormModal = (WrappedComponent, formConfigs, buttonConfigs) => {
 	};
 };
 
-export default EditFormModal;
+export default FormForModal;

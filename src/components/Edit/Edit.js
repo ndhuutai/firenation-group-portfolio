@@ -1,8 +1,9 @@
 import React, {useRef} from 'react';
 import PropTypes from 'prop-types';
 
-import EditFormModal from './EditForm/EditFormModal';
+import FormForModal from './EditForm/FormForModal';
 import Form from '../Form/Form';
+import withModal from '../HOC/Modal/withModal';
 
 const Edit = (props) => {
 
@@ -83,9 +84,11 @@ const Edit = (props) => {
 		}
 	];
 
-	const EditProfileForm = EditFormModal(Form, formConfigs, buttonConfigs);
+	const EditProfileForm = FormForModal(Form, formConfigs, buttonConfigs);
 
 	const closeButtonRef = useRef(null);
+
+	console.log(props);
 
 	return (
 		<div className="modal fade" id="editModal" tabIndex="-1" role="dialog" aria-labelledby="editModalCenter"
@@ -106,6 +109,7 @@ const Edit = (props) => {
 		</div>
 	)
 };
+
 
 Edit.propTypes = {
 	onSubmit : PropTypes.func.isRequired
