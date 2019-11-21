@@ -9,7 +9,7 @@ const withModal = (Component) => {
 				<div className="modal-dialog modal-dialog-centered" role="document">
 					<div className="modal-content">
 						<div className="modal-header">
-							<h5 className="modal-title" id="editModalLabel">Edit profile</h5>
+							<h5 className="modal-title" id="editModalLabel">{props.modalTitle}</h5>
 							<button ref={closeButtonRef} type="button" className="close" data-dismiss="modal" aria-label="close">
 								<span aria-hidden="true">&times;</span>
 							</button>

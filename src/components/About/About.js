@@ -140,7 +140,7 @@ const About = (props) => {
 						         onEdit={() => onEditClick(profile.profileId)} key={profile.name + profile.profileId}/>
 					)
 				})}
-			<Edit onSubmit={onSubmit} profileData={editState}/>
+			<Edit onSubmit={onSubmit} profileData={editState} modalTitle={'Edit profile'}/>
 		</div>
 	)
 };
